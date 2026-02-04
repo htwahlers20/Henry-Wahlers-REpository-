@@ -1,22 +1,16 @@
-"""
-AP Computer Science Principles Sandbox
-This is a repo you can use to store small warm-up problems and try out code.
-"""
-
 # Imports go at the top
 from microbit import *
+import log
 
 
 
 
 def main() -> None:
-        time: list[int] = []
         display_interval: int = 3000
         record_interval: int = 57000
         recording: bool = False
-        loud: float = float(0)
-        import log
-        log.set_labels("temperature", timestamp=log.SECONDS)
+        loud_level: int = 100
+        log.set_labels("sound", timestamp=log.SECONDS)
         
         
          
@@ -34,23 +28,8 @@ def main() -> None:
             
                
            
-            if recording:
-                log.add({"sound" : loud})
-                display.show(len
-            # record
-                time.append(running_time())
-                
-                if microphone.sound_level() > 10:
-                    loud == microphone.sound_level()
-                    display.show(Image.ANGRY)
-                    log.add({"sound" : loud})
-                display.show(len
-                    
-                    
-                
-                
-                    
-                
-                
-            sleep(3000)
-            display.clear()
+            if recording and microphone.sound_level() > loud_level:
+                log.add({"sound" : microphone.sound_level()})
+                display.show(Image.ANGRY)
+                sleep(3000)
+                display.clear()
